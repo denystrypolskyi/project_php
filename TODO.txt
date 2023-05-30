@@ -1,0 +1,44 @@
+completed {
+add google auth button to the right side in login and registration form +
+only authenticated users can go to the menu page +
+sql injection when adding a new user into db +
+when user click register check if user with such email exists +
+if pass1 == pass2 +
+add password validation (8 symbols) +
+}
+
+not necessary {
+if select * from users == 0 insert into users values with id = 0 +
+forgot password page
+}
+
+menu {
+food ordering +
+cart +
+}
+
+food ordering {
+    order_food.php sql injection +
+    check if that day you already have something +
+}
+
+profile {
+    order history+
+    cancel order button
+}
+
+
+admin features {
+admin page +
+admin can remove users +
+admin role +
+добавить всплывающие окно о том что нельзя удалить собстственный аккаунт +
+admin can edit users +
+}
+
+{
+add uemail1 uemail2 +
+account verification with email +
+добавить полоску сверху с информацией о подтверждении почты и кнопку отправить письмо еще раз (страница домой)
+проверка на пустые поля при обновлении пользовательских данных при помощи админки +
+}
