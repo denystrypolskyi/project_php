@@ -13,5 +13,9 @@ if (isset($_GET['deleteUserId'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $_GET['deleteUserId']);
     $stmt->execute();
-    echo '<script>history.back()</script>';
+
+    $stmt->store_result();
+
+    header("Location: ../pages/control_panel.php?info=User with id $_GET[deleteUserId] was deleted successfully.");
+    exit();
 }

@@ -34,9 +34,7 @@
             font-weight: bold;
         }
 
-        h5 {
-            font-weight: bold;
-        }
+        h5 {}
 
         p {
             font-weight: normal;
@@ -96,7 +94,7 @@ if (isset($_SESSION['auth'])) {
     }
     echo "</ul><ul class='navbar-nav ms-auto'>
     <li class='nav-item'>
-    <a class='nav-link' href='#' style='font-weight: normal'>$_SESSION[email]</a>
+    <a class='nav-link' style='font-weight: normal; color: #947361'>$_SESSION[email]</a>
     </li>
     <li class='nav-item'>
     <a class='nav-link' href='../scripts/logout.php'>Logout</a>

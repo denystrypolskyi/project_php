@@ -26,13 +26,14 @@
         } else {
             $role = "Administrator";
         }
-        
+
         $stmt->bind_param('sssi', $name, $email, $role, $id);
         $stmt->execute();
 
         unset($_SESSION['updateUserId']);
 
-        header("Location: ../pages/control_panel.php");
+        header("Location: ../pages/control_panel.php?info=User with id $id was successfully updated.");
+        exit();
     }
     ?>
     

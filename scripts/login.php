@@ -22,21 +22,6 @@ if (empty($uEmail)) {
     exit();
 }
 
-// $stmt = $conn->prepare("SELECT * FROM `users` WHERE `email`=?");
-// $stmt->bind_param("s", $uEmail);
-// $stmt->execute();
-// $stmt->store_result();
-// $numRows = $stmt->num_rows;
-// $stmt->bind_result($id, $username, $password, $email);
-// $stmt->fetch();
-// if ($numRows > 0) {
-//     echo $id;
-//     echo $username;
-//     echo $password;
-//     echo $email;
-//     exit();
-// }
-
 $stmt = $conn->prepare("SELECT `id`, `name`, `password`, `email`, `role`, `email_verified_at` FROM `users` WHERE `email`=?");
 $stmt->bind_param("s", $uEmail);
 $stmt->execute();
@@ -59,6 +44,7 @@ if ($numRows > 0) {
         exit();
     } else {
         header("Location: ../pages/login.php?error=Incorrect password.");
+        exit();
     }
 } else {
     header("Location: ../pages/login.php?error=Incorrect email.");

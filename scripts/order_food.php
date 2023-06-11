@@ -3,6 +3,10 @@ require_once("../scripts/authentication.php");
 
 require_once("../scripts/conn_db.php");
 
+if ($_SESSION['role'] == "Administrator") {
+    header("Location: ../pages/menu.php?error=Administrator can't order food.");
+    exit();
+}
 
 $date = $_POST['date'];
 $id = $_SESSION['id'];
@@ -45,7 +49,9 @@ if ($stmt->num_rows == 0) {
 
     unset($_SESSION["list"]);
 
-    header("Location: ../pages/menu.php?info=You have successfully ordered food.");
+    header('Location: ../pages/menu.php?info=Your order has been accepted. You can check your order history on the "orders" page.');
+    exit();
 } else {
     header("Location: ../pages/menu.php?error=You have already ordered food that day. Please select another date.");
+    exit();
 }

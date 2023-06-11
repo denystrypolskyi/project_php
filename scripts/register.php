@@ -38,19 +38,32 @@ if (isset($_POST['uName']) && isset($_POST['uEmail']) && isset($_POST['uPassword
             exit();
         }
 
-        $sql = "SELECT email FROM `users` WHERE email='$uEmail'";
-        mysqli_query($conn, $sql);
-        if (mysqli_affected_rows($conn) == 1) {
+
+        $query = "SELECT `email` FROM `users` WHERE `email`=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $uEmail);
+        $stmt->execute();
+
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
             header("Location: ../pages/register.php?error=Email already exists.");
             exit();
         }
+        $stmt->close();
 
-        $sql = "SELECT name FROM `users` WHERE name='$uName'";
-        mysqli_query($conn, $sql);
-        if (mysqli_affected_rows($conn) == 1) {
+
+        $query = "SELECT `name` FROM `users` WHERE `name`=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $uName);
+        $stmt->execute();
+
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
             header("Location: ../pages/register.php?error=Name already exists.");
             exit();
         }
+
+        $stmt->close();
 
         $mail = new PHPMailer(true);
 
@@ -76,9 +89,21 @@ if (isset($_POST['uName']) && isset($_POST['uEmail']) && isset($_POST['uPassword
 
         $mail->send();
 
-        echo "<script>alert('Sent Successfully');</script>";
-
         $pass = password_hash($uPassword, PASSWORD_ARGON2ID);
+
+        $stmt = $conn->prepare("SELECT * FROM `users`");
+
+        $stmt->execute();
+
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 0) {
+            $sql = "ALTER TABLE `users` AUTO_INCREMENT = 1";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+        }
+
+        $stmt->close();
 
         $stmt = $conn->prepare("INSERT INTO `users` (`name`, `password`, `email`, `verification_code`) VALUES (?, ?, ?, ?);");
         $stmt->bind_param('ssss', $uName, $pass, $uEmail, $verification_code);

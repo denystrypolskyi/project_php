@@ -27,6 +27,15 @@ if ($_SESSION['role'] != 'Administrator') {
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     ERRORS;
+    } else if (isset($_GET['info'])) {
+        echo <<< INFO
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="text-center">
+        $_GET[info]
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    INFO;
     }
     ?>
 

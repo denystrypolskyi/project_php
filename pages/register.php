@@ -1,5 +1,5 @@
 <?php
-require_once("../libraries/glogin/login.php");
+require_once("../libraries/glogin/glogin.php");
 
 if (isset($_SESSION['auth'])) {
     header("Location: ./home.php");
